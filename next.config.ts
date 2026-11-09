@@ -1,9 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
+  // Every page in this app is per-user or live (payment board), so we use the
+  // classic dynamic rendering model instead of Cache Components.
+  cacheComponents: false,
   turbopack: {
     rules: {
       "*.css": {
@@ -11,6 +11,9 @@ const nextConfig: NextConfig = {
         as: "*.css",
       },
     },
+  },
+  images: {
+    remotePatterns: [{ protocol: "https", hostname: "**.supabase.co" }],
   },
 };
 
