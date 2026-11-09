@@ -97,7 +97,7 @@ export function YourShare({
 
   return (
     <div className="space-y-4 animate-fade-in">
-      <Card className="p-5 bg-stone-900 text-white border-stone-900">
+      <div className="rounded-2xl p-5 bg-stone-900 text-white shadow-sm">
         <div className="flex items-start justify-between gap-3">
           <div>
             <p className="text-xs font-semibold uppercase tracking-wider text-stone-400">Aapka share</p>
@@ -122,7 +122,7 @@ export function YourShare({
             {organizerName} couldn’t confirm your last payment{share.reject_reason ? `: “${share.reject_reason}”` : ""}. Please check and mark again.
           </p>
         ) : null}
-      </Card>
+      </div>
 
       {canPay ? (
         <>

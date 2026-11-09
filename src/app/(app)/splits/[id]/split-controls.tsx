@@ -27,7 +27,7 @@ export function PendingCard({ share, screenshotUrl }: { share: SplitShare; scree
   const [lightbox, setLightbox] = React.useState(false);
 
   return (
-    <Card className="p-4 border-amber-200 bg-amber-50/40">
+    <div className="rounded-2xl border border-amber-200 bg-amber-50/40 p-4">
       <div className="flex items-start gap-3">
         <Avatar name={share.display_name} />
         <div className="min-w-0 flex-1">
@@ -83,7 +83,7 @@ export function PendingCard({ share, screenshotUrl }: { share: SplitShare; scree
           <img src={screenshotUrl} alt="Payment screenshot" className="max-h-full max-w-full rounded-lg" />
         </div>
       ) : null}
-    </Card>
+    </div>
   );
 }
 

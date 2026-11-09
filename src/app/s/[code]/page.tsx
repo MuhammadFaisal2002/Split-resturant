@@ -6,7 +6,7 @@ import { getPublicSplit, splitStats } from "@/lib/splits";
 import { formatPKR } from "@/lib/money";
 import { APP_NAME } from "@/lib/app";
 import { paymentMethods } from "@/lib/payments";
-import { track } from "@/lib/analytics";
+import { TrackOpen } from "@/components/track-open";
 import { Avatar, Card, ShareStatusBadge, Alert } from "@/components/ui";
 import { AutoRefresh } from "@/components/client";
 import { ClaimList, YourShare } from "./payer-controls";
@@ -32,9 +32,6 @@ export default async function PublicSplitPage({ params }: { params: Promise<{ co
   const token = cookieStore.get(CLAIM_COOKIE_PREFIX + code.toLowerCase())?.value ?? null;
   const mine = token ? split.shares.find((s) => s.claimed_token === token) ?? null : null;
 
-  // Analytics: every open. Cheap insert; fine for MVP volumes.
-  await track("link_opened", { split_id: split.id, share_id: mine?.id, props: { claimed: !!mine } });
-
   const stats = splitStats(split);
   const methods = paymentMethods(split.organizer);
   const organizerName = split.organizer.name ?? "the organizer";
@@ -42,6 +39,7 @@ export default async function PublicSplitPage({ params }: { params: Promise<{ co
 
   return (
     <main className="flex-1 flex flex-col">
+      <TrackOpen code={code} />
       {split.status === "open" ? <AutoRefresh ms={15000} /> : null}
 
       <div className="max-w-lg w-full mx-auto px-5 pt-6 pb-20 flex-1">
